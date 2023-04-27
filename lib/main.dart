@@ -1,6 +1,7 @@
+import 'package:cropmaster/api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'homepage.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -12,12 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Crop_Master',
       theme: ThemeData(
-        primaryColor: Colors.green[700],
-        accentColor: Colors.orange[700],
         fontFamily: 'Roboto',
       ),
-      home: LoginPage(),
-    );
+      home: LoginPage(),    );
   }
 }
 
@@ -29,75 +27,85 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title: Text('Crop Master'),
+        backgroundColor: Colors.green,
         centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: Text(
-                'Crop Master',
-                style: TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: 100.0),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: Text(
+                  'Crop Master',
+                  style: TextStyle(
+                      fontSize: 60.0,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.bold),
+                ),
+                alignment: Alignment.topCenter,
+                margin: EdgeInsets.only(bottom: 50),
               ),
-              alignment: Alignment.topCenter,
-              margin: EdgeInsets.only(bottom: 16.0),
-            ),
-            Image.network(
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTlIf32AcmQN5NvEJCO6cZnE5lS3Np724CS43Kc0mSV2Ry1_4p&s',
-              height: 240,
-              width: 120,
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
+              Image.network(
+                'https://imgs.search.brave.com/dy7EsRrSK8akPzJ1_OWgx35xGyLYa-O24Zqw01DcxlA/rs:fit:769:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c3pXMWNFOExSenJP/RnlEYnBZMW5RSGFF/ayZwaWQ9QXBp',
+                height: 190,
+                width: 300,
               ),
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height:10),
-            ElevatedButton(
-              child: Text('Login'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                minimumSize: MaterialStateProperty.all<Size>(Size(100, 70)),
-              ),
-
-            ),
-            SizedBox(height: 16.0),
-            GestureDetector(
-              onTap: () {},
-              child: Text(
-                'Don\'t have an account? Register here',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
+              SizedBox(height: 20),
+              TextField(
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                child: Text('Login'),
+                onPressed: () {
+                  print("clicked");
+                  // Api().getCrops();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.green),
+                  foregroundColor:
+                  MaterialStateProperty.all<Color>(Colors.white),
+                  minimumSize: MaterialStateProperty.all<Size>(Size(10, 55)),
+                ),
+              ),
+              SizedBox(height: 16.0),
+              GestureDetector(
+                onTap: () {},
+                child: Text(
+                  'Don\'t have an account? Register here',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
